@@ -74,7 +74,7 @@
                   <th>Name</th>
                   <th>Shift</th>
                   <th>Time In</th>
-                  <th>Notes</th>
+                  <th>Live Location</th>
                   <th>Image</th>
                   <th>Lack Of</th>
                   <th>In Status</th>
@@ -97,7 +97,7 @@
                     </td>
                     <td class="p-1 align-middle"><?= date('h:i:s A', $atd['date']) ?></td>
                     <td class="p-1 align-middle"><?php if ($atd['notes'] == '') {
-                          echo 'Unfilled';
+                          echo 'Not Supported';
                         } else {
                           echo $atd['notes'];
                         }  ?></td>

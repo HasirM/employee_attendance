@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get GPS Location and Reverse Geolocation</title>
+</head>
+<body>
+    <p id="demo"></p>
+
+    <script>
+        window.onload = function() {
+            getLocation();
+        };
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                document.getElementById("demo").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Reverse Geocoding
+            var apiEndpoint = "https://nominatim.openstreetmap.org/reverse?";
+            var apiKey = ""; // Optional: If you have an API key for Nominatim, you can add it here
+            var format = "json";
+            var url = `${apiEndpoint}format=${format}&lat=${latitude}&lon=${longitude}&${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var address = data.display_name;
+                    document.getElementById("demo").innerHTML += "<br>Address: " + address;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>

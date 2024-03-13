@@ -144,6 +144,8 @@ $this->_checkIn($value);
     }
   }
   
+
+  
   // Check Time In
   private function _checkIn($value)
   {

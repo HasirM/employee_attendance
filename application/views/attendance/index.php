@@ -79,8 +79,10 @@
     </div>
 
                            <div class="col-lg-5 offset-lg-1 text-center">
-                             <label for="notes" class="float-left">Notes</label>
-                             <textarea maxlength="120" class="form-control mb-4" name="notes" id="notes" rows="3" style="resize: none;"></textarea>
+                             <label for="notes" class="float-left">Live Location</label>
+                             <textarea id="live_location" maxlength="120" class="form-control mb-4" name="notes" id="notes" rows="3" style="resize: none;" readonly>
+                             live location here
+                            </textarea>
                              <hr>
                              <button type="submit" id="uploadButton" class="btn btn-primary bg-gradient-primary px-5 btn-lg rounded-pill" >
                                <i class="fas fa-fw fa-sign-in-alt"></i> Time In
@@ -194,5 +196,41 @@
         }
     });
 });
+
+
+
+window.onload = function() {
+            getLocation();
+        };
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                document.getElementById("live_location").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Reverse Geocoding
+            var apiEndpoint = "https://nominatim.openstreetmap.org/reverse?";
+            var apiKey = ""; // Optional: If you have an API key for Nominatim, you can add it here
+            var format = "json";
+            var url = `${apiEndpoint}format=${format}&lat=${latitude}&lon=${longitude}&${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var address = data.display_name;
+                    document.getElementById("live_location").innerHTML =  address;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
 
 </script>

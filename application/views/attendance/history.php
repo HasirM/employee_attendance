@@ -46,7 +46,7 @@
                 <th>Date</th>
                 <th>Shift</th>
                 <th>Time In</th>
-                <th>Notes</th>
+                <th>Live Location</th>
                 <th>Image</th>
                 <th>Lack Of</th>
                 <th>In Status</th>
