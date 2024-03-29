@@ -51,6 +51,7 @@
       <thead>
         <tr>
           <th>#</th>
+          <th>Name</th>
           <th>Date</th>
           <th>Shift</th>
           <th>Time In</th>
@@ -74,6 +75,9 @@
 
             <!-- Kolom 1 -->
             <td><?= $i++; ?></td>
+
+            <td><?= $atd['name']; ?></td>
+
             <?php
 
             // if WEEKENDS
@@ -84,8 +88,13 @@
 
             // if WEEKDAYS
             else : ?>
+            
               <!-- Kolom 2 (Date) -->
               <td><?= date('l, d F Y', $atd['date']); ?></td>
+
+              <!-- Kolom 3 (Name) -->
+
+
 
               <!-- Kolom 3 (Shift) -->
               <td>
