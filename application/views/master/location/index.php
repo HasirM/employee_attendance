@@ -7,7 +7,7 @@
               <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-              <a href="<?= base_url('master/a_location'); ?>" class="btn btn-primary btn-sm bg-gradient-primary rounded-0 btn-icon-split mb-0">
+              <a href="<?= base_url('master/a_location'); ?>" class="btn btn-primary btn-sm bg-gradient-primary rounded-x btn-icon-split mb-0">
                 <span class="icon text-white-600">
                   <i class="fas fa-plus-circle"></i>
                 </span>
@@ -23,7 +23,7 @@
           </div>
 
           <!-- Data Table Location-->
-          <div class="card shadow mb-4 rounded-0">
+          <div class="card shadow mb-4 rounded-x">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-dark">DataTables Location</h6>
             </div>
@@ -52,12 +52,12 @@
                         <td class="align-middle"><?= $i++; ?></td>
                         <td class="align-middle"><?= $lct['name']; ?></td>
                         <td class="align-middle text-center">
-                          <a href="<?= base_url('master/e_location/') . $lct['id'] ?>" class="btn btn-primary rounded-0 btn-sm text-xs">
+                          <a href="<?= base_url('master/e_location/') . $lct['id'] ?>" class="btn btn-primary rounded-x btn-sm text-xs">
                             <span class="icon text-white" title="Edit">
                               <i class="fas fa-edit"></i>
                             </span>
                           </a> |
-                          <a href="<?= base_url('master/d_location/') . $lct['id'] ?>" class="btn btn-danger rounded-0 btn-sm text-xs" onclick="return confirm('Deleted Location will lost forever. Still want to delete?')">
+                          <a href="<?= base_url('master/d_location/') . $lct['id'] ?>" class="btn btn-danger rounded-x btn-sm text-xs" onclick="return confirm('Deleted Location will lost forever. Still want to delete?')">
                             <span class="icon text-white" title="Delete">
                               <i class="fas fa-trash-alt"></i>
                             </span>

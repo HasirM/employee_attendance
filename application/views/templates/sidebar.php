@@ -2,12 +2,22 @@
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+      <a class="sidebar-brand side_bar_logo_container d-flex align-items-center justify-content-center" href="">
+      <div class="sidebar-brand-icon">
+      <img src="<?= base_url('assets/img/dotsync_wlogo.png') ?>" alt="" class="p-0 side_bar_logo">
+ </div>
+        <div class="sidebar-brand-text mr-3">
+      <img src="<?= base_url('assets/img/dotsync_text_white.svg') ?>" alt="" class="p-0">
+          
+        </div>
+
+     </a>
+
+     <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon">
           <img src="<?= base_url('assets/img/logo.jpg') ?>" alt="" class="img-thumbnail rounded-circle border-3 p-0" id="system-logo">
         </div>
-        <div class="sidebar-brand-text mx-3">E.A.S</div>
-      </a>
+      </a> -->
 
 
       <!-- Query Menu -->

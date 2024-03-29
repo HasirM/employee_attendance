@@ -9,22 +9,22 @@
     </div>
   </div>
   <hr>
-  <div class="card rounded-0 shadow mb-3">
+  <div class="card rounded-x shadow mb-3">
     <div class="card-body">
-      <fieldset class="border rounded-0 px-2 pb-2">
+      <fieldset class="border rounded-x px-2 pb-2">
         <legend class="ml-3 px-3 w-auto">Filter Report</legend>
         <form action="" method="GET">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-              <input type="date" name="start" class="form-control form-control-sm rounded-0" value="<?= !empty($this->input->get('start')) ? $this->input->get('start') : '' ?>">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <input type="date" name="start" class="form-control form-control-sm rounded-x" value="<?= !empty($this->input->get('start')) ? $this->input->get('start') : '' ?>">
               <?= form_error('start', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-              <input type="date" name="end" class="form-control form-control-sm rounded-0" value="<?= !empty($this->input->get('end')) ? $this->input->get('end') : '' ?>">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <input type="date" name="end" class="form-control form-control-sm rounded-x" value="<?= !empty($this->input->get('end')) ? $this->input->get('end') : '' ?>">
               <?= form_error('end', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
             <div class="col-2">
-              <button type="submit" class="btn btn-primary btn-sm rounded-0 bg-gradient-primary "><i class="fa fa-file"></i> Show Attendance</button>
+              <button type="submit" class="btn btn-primary btn-sm rounded-x bg-gradient-primary "><i class="fa fa-file"></i> Show Attendance</button>
             </div>
           </div>
         </form>
@@ -33,7 +33,7 @@
   </div>
 
   <?php if ($data['attendance']) : ?>
-    <div class="card shadow mb-4 rounded-0">
+    <div class="card shadow mb-4 rounded-x">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-dark">Data Attendance</h6>
       </div>
@@ -129,7 +129,7 @@
       </div>
     </div>
   <?php else : ?>
-    <h1 class="text-center">Please Pick Your Date</h1>
+    <h1 class="text-center">Sorry, Nothing to show. <br>Kindly check the date.</h1>
   <?php endif; ?>
 
 </div>

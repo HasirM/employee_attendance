@@ -1,1 +1,1 @@
-Employee Attendance System
+DotSync

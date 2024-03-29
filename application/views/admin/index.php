@@ -3,7 +3,7 @@
 
          <!-- Page Heading -->
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-           <h1 class="h3 mb-0 text-gray-800"><?= $title; ?><?php echo date('h:i:s',1710320801);?></h1>
+           <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
          </div>
 
          <!-- Content Row -->
@@ -11,12 +11,12 @@
 
            <!-- Earnings (Monthly) Card Example -->
            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
-             <div class="card border-left-primary shadow h-100 py-2 rounded-0 border-4">
+             <div class="card border-left-primary shadow h-100 py-2  border-4">
                <div class="card-body py-1">
                  <div class="row no-gutters align-items-center">
                    <div class="col mr-2">
                      <div class="text-lg font-weight-bold mb-1">Departments</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-right"><?= $display['c_department']; ?></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-center"><?= $display['c_department']; ?></div>
                    </div>
                    <div class="col-auto">
                      <i class="fas fa-building fa-2x text-gray-300"></i>
@@ -27,12 +27,12 @@
            </div>
            <!-- Earnings (Monthly) Card Example -->
            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
-             <div class="card border-left-info shadow h-100 py-2 rounded-0 border-4">
+             <div class="card border-left-info shadow h-100 py-2  border-4">
                <div class="card-body py-1">
                  <div class="row no-gutters align-items-center">
                    <div class="col mr-2">
                      <div class="text-lg font-weight-bold mb-1">Shifts</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-right"><?= $display['c_shift']; ?></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-center"><?= $display['c_shift']; ?></div>
                    </div>
                    <div class="col-auto">
                      <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
@@ -44,12 +44,12 @@
 
            <!-- Earnings (Monthly) Card Example -->
            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
-             <div class="card border-left-success shadow h-100 py-2 rounded-0 border-4">
+             <div class="card border-left-success shadow h-100 py-2  border-4">
                <div class="card-body py-1">
                  <div class="row no-gutters align-items-center">
                    <div class="col mr-2">
                      <div class="text-lg font-weight-bold mb-1">Employees</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-right"><?= $display['c_employee']-1; ?></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-center"><?= $display['c_employee']-1; ?></div>
                    </div>
                    <div class="col-auto">
                      <i class="fas fa-id-badge fa-2x text-gray-300"></i>
@@ -61,12 +61,12 @@
 
            <!-- Pending Requests Card Example -->
            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
-             <div class="card border-left-danger shadow h-100 py-2 rounded-0 border-4">
+             <div class="card border-left-danger shadow h-100 py-2  border-4">
                <div class="card-body py-1">
                  <div class="row no-gutters align-items-center">
                    <div class="col mr-2">
                      <div class="text-lg font-weight-bold mb-1">Users</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-right"><?= $display['c_users']; ?></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800 text-center"><?= $display['c_users'] - 1; ?></div>
                    </div>
                    <div class="col-auto">
                      <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -84,7 +84,7 @@
            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
              <!-- Pie Chart -->
              <div class="col p-0">
-               <div class="card shadow mb-4 rounded-0">
+               <div class="card shadow mb-4 ">
                  <!-- Card Header - Dropdown -->
                  <div class="card-header py-3 d-flex flex-rowz align-items-center justify-content-between">
                    <h6 class="m-0 font-weight-bold text-muted">Departments' Employees</h6>
@@ -96,8 +96,8 @@
                      <thead class="bg-gradient-primary text-white">
                        <tr>
                          <th class="text-center p-1" scope="col">#</th>
-                         <th class="p-1" scope="col">Dept Code</th>
-                         <th class="p-1" scope="col">Employees</th>
+                         <th class="text-center p-1" scope="col">Dept Code</th>
+                         <th class="text-center p-1" scope="col">Employees</th>
                        </tr>
                      </thead>
                      <tbody>
@@ -105,8 +105,8 @@
                         foreach ($d_list as $d) : ?>
                          <tr>
                            <th class="text-center p-1" scope="row"><?= $i++ ?></th>
-                           <td class="p-1"><?= $d['d_id'] ?></td>
-                           <td class="p-1 text-right"><?= number_format($d['qty']) ?></td>
+                           <td class="text-center p-1"><?= $d['d_id'] ?></td>
+                           <td class="text-center p-1"><?= number_format($d['qty']) ?></td>
                          </tr>
                        <?php endforeach; ?>
                      </tbody>
@@ -117,7 +117,7 @@
            </div>
            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
              <div class="col p-0">
-               <div class="card shadow mb-4 rounded-0">
+               <div class="card shadow mb-4 ">
                  <!-- Card Header - Dropdown -->
                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                    <h6 class="m-0 font-weight-bold text-muted">Employees per Shift</h6>
@@ -128,8 +128,8 @@
                      <thead class="bg-gradient-primary text-white">
                        <tr>
                          <th class="text-center p-1" scope="col">#</th>
-                         <th class="p-1" scope="col">Shift</th>
-                         <th class="p-1" scope="col">Employees</th>
+                         <th class="text-center p-1" scope="col">Shift</th>
+                         <th class="text-center p-1" scope="col">Employees</th>
                        </tr>
                      </thead>
                      <tbody>
@@ -141,8 +141,8 @@
                           ?>
                          <tr>
                            <th class="text-center p-1" scope="row"><?= $i++ ?></th>
-                           <td class="p-1 align-middle">Shift: <?= $s['s_id'] ?> <small>(<?= date('h:i A', strtotime("2022-06-23". $s['start'])) ?> - <?= date('h:i A', strtotime("2022-06-23". $s['end'])) ?>)</small></td>
-                           <td class="p-1 text-right"><?= number_format($s['qty']) ?></td>
+                           <td class="text-center p-1 align-middle">Shift: <?= $s['s_id'] ?> <small>(<?= date('h:i A', strtotime("2022-06-23". $s['start'])) ?> - <?= date('h:i A', strtotime("2022-06-23". $s['end'])) ?>)</small></td>
+                           <td class="text-center p-1"><?= number_format($s['qty']) ?></td>
                          </tr>
                        <?php endforeach; ?>
                      </tbody>

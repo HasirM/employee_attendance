@@ -8,14 +8,24 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="icon" type="image/x-icon" href="<?= base_url('assets/img/dotsync_logo.svg') ?>">
+
+<link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url('assets/'); ?>https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+<link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 
   <title>Attendance Report</title>
 </head>
 
 <body>
-  <div class="container border">
+  <div class="container print_container border">
     <div class="row mb-2">
-      <div class="col">
+      <div class="col print_header">
+      <img src="<?= base_url('assets/img/Prizy_logo.png') ?>" alt="" class="print_img p-0 footer_logo">
+      
         <h2 class="text-center">Employee Attendance Report</h2>
       </div>
     </div>
@@ -23,7 +33,13 @@
       <div class="col-6">
         <h1 class="h5">Department Code : <?= $dept ?></h1>
       </div>
-      <div class="col-6 text-right">
+      <div class="col-6">
+        <h1 class="h5">Employee Detail : <?= $emp ?></h1>
+      </div>
+      <div class="col-6">
+        <h1 class="h5">Shift Code : <?= $shift ?></h1>
+      </div>
+      <div class="col-6">
         <?php if ($start != null || $end != null) : ?>
           <h1 class="h5">From: <i><?= $start; ?></i> To: <i><?= $end; ?></i></h1>
         <?php else : ?>
@@ -31,7 +47,7 @@
         <?php endif; ?>
       </div>
     </div>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="print_table table table-bordered" id="dataTable" width="100%" border="1" cellspacing="0">
       <thead>
         <tr>
           <th>#</th>
@@ -120,12 +136,12 @@
   
   <!-- Optional JavaScript -->
   <script>
-    $(function(){
-      window.print();
-      setTimeout(() => {
-        window.close()
-      }, 300);
-    })
+    // $(function(){
+    //   window.print();
+    //   setTimeout(() => {
+    //     window.close()
+    //   }, 300);
+    // })
   </script>
 </body>
 

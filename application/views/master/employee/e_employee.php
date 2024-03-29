@@ -4,7 +4,7 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-          <a href="<?= base_url('master/employee'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-0">
+          <a href="<?= base_url('master/employee'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-x">
             <span class="icon text-white">
               <i class="fas fa-chevron-left"></i>
             </span>
@@ -14,9 +14,9 @@
           <?= form_open_multipart('master/e_employee/' . $employee['id']); ?>
           <div class="col-lg p-0">
             <?= $this->session->flashdata('message') ?>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-4">
               <div class="col-lg-3">
-                <div class="card rounded-0 shadow" style="width: 100%; height: 100%">
+                <div class="card rounded-x shadow" style="width: 100%; height: 100%">
                   <img src="<?= base_url('images/pp/') . $employee['image']; ?>" class="card-img-top w-75 mx-auto pt-3">
                   <div class="card-body mt-3">
                     <label for="image">Change Employee Image</label>
@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="col-lg-6">
-                <div class="card rounded-0 shadow">
+                <div class="card rounded-x shadow">
                   <h5 class="card-header">Employee Master Data</h5>
                   <div class="card-body">
                     <h5 class="card-title">Edit Employee</h5>
@@ -116,7 +116,7 @@
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-0">
+                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-x">
                       <span class="icon text-white">
                         <i class="fas fa-check"></i>
                       </span>

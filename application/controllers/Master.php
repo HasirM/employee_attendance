@@ -52,11 +52,11 @@ class Master extends CI_Controller
 
     $checkId = $this->db->get_where('department', ['id' => $data['id']])->num_rows();
     if ($checkId > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
       Failed to add, ID used!</div>');
     } else {
       $this->db->insert('department', $data);
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully added a new department!</div>');
       redirect('master/e_dept/'.$this->input->post('d_id'));
     }
@@ -86,17 +86,33 @@ class Master extends CI_Controller
   {
     $data = ['name' => $name];
     $this->db->update('department', $data, ['id' => $d_id]);
-    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully edited a department!</div>');
     redirect('master/e_dept/'.$d_id);
   }
+
   public function d_dept($d_id)
-  {
-    $this->db->delete('department', ['id' => $d_id]);
-    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
-        Successfully deleted a department!</div>');
+{
+    // Check if the shift is used by any employees
+    $this->db->where('department_id', $d_id);
+    $employee_count = $this->db->count_all_results('employee_department');
+
+    if ($employee_count > 0) {
+        // Shift is already in use, display a custom error message
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
+            Cannot delete the Department because it is already in use by employees!</div>');
+    } else {
+        // No employees are using the shift, so delete it
+       $this->db->query('SET foreign_key_checks = 0');
+        $this->db->delete('department', ['id' => $d_id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
+            Successfully deleted the Department!</div>');
+    }
+
     redirect('master');
-  }
+}
+
+
   // End of department
   public function shift()
   {
@@ -158,11 +174,11 @@ class Master extends CI_Controller
     $id = $this->db->insert_id();
     $affectedRow = $this->db->affected_rows();
     if ($affectedRow > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully added a new shift!</div>');
       redirect('master/e_shift/'.$id);
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
       Failed to add new shift!</div>');
     }
   }
@@ -220,27 +236,46 @@ class Master extends CI_Controller
   {
     $this->db->where('id', $s_id);
     $this->db->update('shift', $set, ['id' => $s_id]);
-    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully edited a shift!</div>');
     redirect('master/e_shift/'.$s_id);
   }
 
   public function d_shift($s_id)
-  {
-    $query = 'ALTER TABLE `shift` AUTO_INCREMENT = 1';
-    $this->db->delete('shift', ['id' => $s_id]);
-    $this->db->query($query);
-    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
-        Successfully deleted a shift!</div>');
+{
+    // Check if the shift is used by any employees
+    $this->db->where('shift_id', $s_id);
+    $employee_count = $this->db->count_all_results('employee');
+
+    if ($employee_count > 0) {
+        // Shift is already in use, display a custom error message
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
+            Cannot delete the shift because it is already in use by employees!</div>');
+    } else {
+       $this->db->query('SET foreign_key_checks = 0');
+        // No employees are using the shift, so delete it
+        $this->db->delete('shift', ['id' => $s_id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
+            Successfully deleted the shift!</div>');
+    }
+
     redirect('master/shift');
-  }
+}
+
+    
   // End of Shift
 
   public function employee()
   {
     // Employee Data
     $d['title'] = 'Employee';
-    $d['employee'] = $this->db->query("SELECT e.*,s.start, s.end FROM `employee` e inner join `shift` s on e.shift_id = s.id order by `name` asc")->result_array();
+    $d['employee'] = $this->db->query("
+    SELECT e.*, s.start, s.end, ed.department_id
+    FROM `employee` e
+    INNER JOIN `shift` s ON e.shift_id = s.id
+    INNER JOIN `employee_department` ed ON e.id = ed.employee_id
+    ORDER BY `name` ASC
+")->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     $this->load->view('templates/table_header', $d);
@@ -291,7 +326,7 @@ class Master extends CI_Controller
     $checkEmail = $this->db->query($query)->num_rows();
 
     if ($checkEmail > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
       Email already used!</div>');
     }else{
       // Config Upload Image
@@ -334,13 +369,13 @@ class Master extends CI_Controller
       $this->db->insert('employee_department', $d);
       $rows = $this->db->affected_rows();
       if ($rows > 0) {
-        $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
           Successfully added a new employee!</div>');
       } else {
-        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
           Failed to add data!</div>');
       }
-      redirect('master/e_employee/'.$e_id);
+      redirect('master/employee');
     }
 
   }
@@ -415,34 +450,50 @@ class Master extends CI_Controller
     $this->db->update('employee_department', $department, ['employee_id' => $e_id]);
     $upd2 = $this->db->affected_rows();
     if ($upd1 > 0 && $upd2 > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
       Successfully updated an employee!</div>');
-      redirect('master/e_employee/'.$e_id);
+      redirect('master/employee');
     } else if ($upd1 > 0 && $upd2 <= 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
       Successfully updated an employee!</div>');
-      redirect('master/e_employee/'.$e_id);
+      redirect('master/employee');
     } else if ($upd1  <= 0 && $upd2 > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
       Successfully updated an employee!</div>');
-      redirect('master/e_employee/'.$e_id);
+      redirect('master/employee');
     } else {
       if(!empty($this->db->error()['message']))
-        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to update employee\'s data!</div>');
       else
-       $this->session->set_flashdata('message', '<div class="alert alert-warning rounded-0 mb-2" role="alert">
+       $this->session->set_flashdata('message', '<div class="alert alert-warning rounded-x mb-2" role="alert">
         There\'s no field has changed.</div>');
-      redirect('master/e_employee/'.$e_id);
+      redirect('master/employee');
     }
   }
+
   public function d_employee($e_id)
   {
+    $this->db->where('employee_id', $e_id);
+    $user_count = $this->db->count_all_results('users');
+
+    if ($user_count > 0) {
+        // Shift is already in use, display a custom error message
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
+            Cannot delete the Employee, User already in use!</div>');
+    } else {
+        
     $this->db->delete('employee', ['id' => $e_id]);
-    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+    $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully deleted an employee!</div>');
+
+    }
+
     redirect('master/employee');
   }
+
+
+
   public function location()
   {
     $d['title'] = 'Location';
@@ -455,6 +506,8 @@ class Master extends CI_Controller
     $this->load->view('master/location/index', $d);
     $this->load->view('templates/table_footer');
   }
+
+
   public function a_location()
   {
     $d['title'] = 'Location';
@@ -477,11 +530,11 @@ class Master extends CI_Controller
 
     if ($rows > 0) {
       $id=$this->db->insert_id();
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully added a new location!</div>');
       redirect('master/e_location/'.$id);
   } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to add data!</div>');
     }
   }
@@ -512,15 +565,15 @@ class Master extends CI_Controller
     $rows = $this->db->affected_rows();
 
     if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
           Successfully edited a location!</div>');
     redirect('master/e_location/'.$l_id);
     } else {
       if(!empty($this->db->error()['message']))
-        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to edit data!</div>');
       else
-        $this->session->set_flashdata('message', '<div class="alert alert-warning rounded-0 mb-2" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-warning rounded-x mb-2" role="alert">
         No Changes!</div>');
     }
 
@@ -533,10 +586,10 @@ class Master extends CI_Controller
     $rows = $this->db->affected_rows();
 
     if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
         Successfully deleted a location!</div>');
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to delete a data!</div>');
     }
 
@@ -605,10 +658,10 @@ class Master extends CI_Controller
     $this->db->insert('users', $data);
     $rows = $this->db->affected_rows();
     if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
           Successfully created an account!</div>');
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to create account!</div>');
     }
     redirect('master/users');
@@ -638,10 +691,10 @@ class Master extends CI_Controller
     $this->db->update('users', $data, ['username' => $username]);
     $rows = $this->db->affected_rows();
     if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
           Successfully edited an account!</div>');
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to edit account!</div>');
     }
     redirect('master/users');
@@ -649,13 +702,14 @@ class Master extends CI_Controller
 
   public function d_users($username)
   {
+    $this->db->query('SET foreign_key_checks = 0');
     $this->db->delete('users', ['username' => $username]);
     $rows = $this->db->affected_rows();
     if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success rounded-x mb-2" role="alert">
           Successfully deleted an account!</div>');
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-0 mb-2" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-danger rounded-x mb-2" role="alert">
         Failed to delete account!</div>');
     }
     redirect('master/users');

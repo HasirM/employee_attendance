@@ -7,7 +7,7 @@
       <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-      <a href="<?= base_url('admin') ?>" class="btn btn-md btn-light btn-sm bg-gradient-light border rounded-0 mb-2 btn-icon-split">
+      <a href="<?= base_url('admin') ?>" class="btn btn-md btn-light btn-sm bg-gradient-light border rounded-x mb-2 btn-icon-split">
         <span class="icon text-white-600">
           <i class="fas fa-angle-left"></i>
         </span>
@@ -16,32 +16,55 @@
     </div>
   </div>
   <hr>
-  <div class="card rounded-0 shadow mb-3">
+  <div class="card rounded-x shadow mb-3">
     <div class="card-body">
-      <fieldset class="border rounded-0 px-2 pb-2">
+      <fieldset class="border rounded-x px-2 pb-2">
         <legend class="ml-3 px-3 w-auto">Filter Report</legend>
         <form action="" method="GET">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-              <input type="date" name="start" class="form-control form-control-sm rounded-0" value="<?= !empty($this->input->get('start')) ? $this->input->get('start') : '' ?>">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <input type="date" name="start" class="form-control form-control-sm rounded-x" value="<?= !empty($this->input->get('start')) ? $this->input->get('start') : '' ?>">
               <?= form_error('start', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
-              <input type="date" name="end" class="form-control form-control-sm rounded-0" value="<?= !empty($this->input->get('end')) ? $this->input->get('end') : '' ?>">
+              <input type="date" name="end" class="form-control form-control-sm rounded-x" value="<?= !empty($this->input->get('end')) ? $this->input->get('end') : '' ?>">
               <?= form_error('end', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-              <select class="form-control form-control-sm rounded-0" name="dept">
-                <option disabled>Department</option>
+
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+            <select class="form-control form-control-sm rounded-x" name="e_id">
+                <option value="ALL" selected>All Employees</option>
+                <?php foreach ($employee as $e) : ?>
+                    <?php if ($e['id'] != '025' && $e['name'] != 'admin') : ?>
+                      <option <?= ((!empty($this->input->get('e_id')) && $this->input->get('e_id') == $e['id']) && ($e['id'] != '025' || $e['name'] != 'admin')) ? 'selected' : '' ?> value="<?= $e['id']; ?>"><?= $e['name']; ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+              <?= form_error('dept', '<small class="text-danger pl-3">', '</small>') ?>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <select class="form-control form-control-sm rounded-x" name="dept">
+                <option value="ALL" selected>All Department</option>
                 <?php foreach ($department as $d) : ?>
                   <option <?= !empty($this->input->get('dept')) && $this->input->get('dept') == $d['id'] ? 'selected' : '' ?> value="<?= $d['id']; ?>"><?= $d['id']; ?></option>
                 <?php endforeach; ?>
               </select>
               <?= form_error('dept', '<small class="text-danger pl-3">', '</small>') ?>
-
             </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <select class="form-control form-control-sm rounded-x" name="shift">
+                <option value="ALL">All Shift</option>
+                <?php foreach ($shift as $s) : ?>
+                  <option <?= !empty($this->input->get('shift')) && $this->input->get('shift') == $s['id'] ? 'selected' : '' ?> value="<?= $s['id']; ?>"><?= $s['start'] .' to '.$s["end"]; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <?= form_error('dept', '<small class="text-danger pl-3">', '</small>') ?>
+            </div>
+
             <div class="col-2">
-              <button type="submit" class="btn btn-primary btn-sm rounded-0 bg-gradient-primary "><i class="fa fa-file"></i> Show Report</button>
+              <button type="submit" class="btn btn-primary btn-sm rounded-x bg-gradient-primary "><i class="fa fa-file"></i> Show Report</button>
             </div>
           </div>
         </form>
@@ -50,17 +73,17 @@
   </div>
   <!-- End of row show -->
   <?php if ($attendance == false) : ?>
-    <h3 class="text-center my-5">Please Choose Department and Dates.</h3>
+    <h3 class="text-center my-5">Please Choose Correct Department and Dates.</h3>
   <?php else : ?>
     <?php if ($attendance != null) : ?>
-      <div class="card shadow mb-4 rounded-0">
+      <div class="card shadow mb-4 rounded-x">
         <div class="card-header py-3">
           <div class="d-flex w-100 align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <h6 class="m-0 font-weight-bold text-dark">Data Attendance</h6>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 text-right">
-              <a href="<?= base_url('report/print/') . $start . '/' . $end . '/' . $dept_code ?>" target="blank" class="btn btn-sm btn-light bg-gradient-light border shadow-sm rounded-0"><i class="fas fa-download fa-sm text-dark"></i> Print Report</a>
+              <a href="<?= base_url('report/print/') . $start . '/' . $end . '/' . $dept_code . '/' . $shift_code . '/' . $emp_code ?>" target="blank" class="btn btn-sm btn-light bg-gradient-light border shadow-sm rounded-x"><i class="fas fa-download fa-sm text-dark"></i> Print Report</a>
             </div>
           </div>
         </div>
@@ -73,6 +96,7 @@
                   <th>Date</th>
                   <th>Name</th>
                   <th>Shift</th>
+                  <th>Dept</th>
                   <th>Time In</th>
                   <th>Live Location</th>
                   <th>Image</th>
@@ -95,6 +119,7 @@
                         <div class="text-xs"><?= date("h:i A", strtotime('2022-06-23 '.$atd['end'])) ?></div>
                       </div>
                     </td>
+                    <td class="p-1 align-middle"><?= $atd['dept'] ?></td>
                     <td class="p-1 align-middle"><?= date('h:i:s A', $atd['date']) ?></td>
                     <td class="p-1 align-middle"><?php if ($atd['notes'] == '') {
                           echo 'Not Supported';

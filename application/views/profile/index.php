@@ -1,6 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-  <div class="card rounded-0 shadow">
+  <div class="card rounded-x shadow">
     <div class="card-header">
       <h3 class="card-title font-weight-bolder text-dark h3 mb-0"><?= $account['name'] ?></h3>
     </div>
@@ -15,7 +15,7 @@
 
           <!-- right -->
           <div class="col-sm-10 col-md-6 offset-sm-1">
-            <h1 class="h3 text-white bg-gradient-dark p-1 rounded-0 mt-1 mb-3">Information</h1>
+            <h1 class="h3 text-white bg-gradient-dark p-1 rounded-x mt-1 mb-3">Information</h1>
             <table class="table">
               <tbody>
                 <tr>

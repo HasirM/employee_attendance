@@ -6,7 +6,7 @@
 
           <div class="row">
             <div class="col-lg-3">
-              <a href="<?= base_url('master/a_dept'); ?>" class="btn btn-primary bg-gradient-primary btn-icon-split rounded-0 mb-4">
+              <a href="<?= base_url('master/a_dept'); ?>" class="btn btn-primary bg-gradient-primary btn-icon-split rounded-x mb-4">
                 <span class="icon text-white-600">
                   <i class="fas fa-plus-circle"></i>
                 </span>
@@ -45,12 +45,12 @@
                         <td class="align-middle"><?= $dpt['id']; ?></td>
                         <td class="align-middle"><?= $dpt['name']; ?></td>
                         <td class="align-middle text-center">
-                          <a href="<?= base_url('master/e_dept/') . $dpt['id'] ?>" class="btn btn-primary rounded-0 btn-sm text-xs">
+                          <a href="<?= base_url('master/e_dept/') . $dpt['id'] ?>" class="btn btn-primary rounded-x btn-sm text-xs">
                             <span class="icon text-white" title="Edit">
                               <i class="fas fa-edit"></i>
                             </span>
                           </a> |
-                          <a href="<?= base_url('master/d_dept/') . $dpt['id'] ?>" class="btn btn-danger rounded-0 btn-sm text-xs" onclick="return confirm('Deleted Department will lost forever. Still want to delete?')">
+                          <a href="<?= base_url('master/d_dept/') . $dpt['id'] ?>" class="btn btn-danger rounded-x btn-sm text-xs" onclick="return confirm('Deleted Department will lost forever. Still want to delete?')">
                             <span class="icon text-white" title="Delete">
                               <i class="fas fa-trash-alt"></i>
                             </span>

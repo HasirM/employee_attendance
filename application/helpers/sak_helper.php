@@ -3,9 +3,19 @@
 function is_logged_in()
 {
   $ci = get_instance();
-  if (!$ci->session->userdata['username']) {
+  $username = $ci->session->userdata['username'];
+  if (!$username) {
     redirect('auth');
   } else {
+    $ci->db->where('username', $username);
+    $user_exists = $ci->db->count_all_results('users');
+
+    if (!$user_exists) {
+        // User does not exist, logout
+        $ci->session->unset_userdata('username');
+        // $ci->session->unset_userdata('role_id'); // Assuming you have a logout function
+    }
+
     $role_id = $ci->session->userdata['role_id'];
     $menu = $ci->uri->segment(1);
 

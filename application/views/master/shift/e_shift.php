@@ -4,15 +4,15 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-          <a href="<?= base_url('master/shift'); ?>" class="btn btn-light bg-gradient-light border rounded-0 btn-icon-split mb-4">
+          <a href="<?= base_url('master/shift'); ?>" class="btn btn-light bg-gradient-light border rounded-x btn-icon-split mb-4">
             <span class="icon text-white">
               <i class="fas fa-chevron-left"></i>
             </span>
             <span class="text">Back</span>
           </a>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-4">
             <form action="" method="POST" class="col-lg-5  p-0">
-              <div class="card rounded-0">
+              <div class="card rounded-x">
                 <h5 class="card-header">Shift Master Data</h5>
                 <div class="card-body">
                   <?= $this->session->flashdata('message') ?>
@@ -58,7 +58,7 @@
                         <?= form_error('s_end_s', '<small class="text-danger">', '</small>') ?>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-0">
+                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-x">
                       <span class="icon text-white">
                         <i class="fas fa-check"></i>
                       </span>

@@ -2,7 +2,11 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; CI EAS <?= date("Y") ?> - Employee Attendance System</span>
+          <a class="sidebar-brand footer_logo_container d-flex align-items-center justify-content-center" href="">
+      <img src="<?= base_url('assets/img/dotsync_logo_dark.png') ?>" alt="" class="p-0 footer_logo">
+    
+     </a>
+            <span>Copyright &copy; <?= date("Y") ?> - DotSync</span>
           </div>
         </div>
       </footer>

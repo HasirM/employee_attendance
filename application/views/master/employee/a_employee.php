@@ -5,7 +5,7 @@
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
           <div class="row">
             <div class="col-lg-3">
-              <a href="<?= base_url('master/employee'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-0">
+              <a href="<?= base_url('master/employee'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-x">
                 <span class="icon text-white">
                   <i class="fas fa-chevron-left"></i>
                 </span>
@@ -16,10 +16,10 @@
               <?= $this->session->flashdata('message'); ?>
             </div>
           </div>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-4">
             <div class="col-lg-10 p-0">
               <?= form_open_multipart('master/a_employee'); ?>
-              <div class="card rounded-0">
+              <div class="card rounded-x">
                 <h5 class="card-header">Employee Master Data</h5>
                 <div class="card-body">
                   <h5 class="card-title">Add New Employee</h5>
@@ -100,7 +100,7 @@
                       </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-0">
+                  <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-x">
                     <span class="icon text-white">
                       <i class="fas fa-plus-circle"></i>
                     </span>

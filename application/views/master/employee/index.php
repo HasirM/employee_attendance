@@ -7,7 +7,7 @@
               <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-              <a href="<?= base_url('master/a_employee'); ?>" class="btn btn-primary btn-sm bg-gradient-primary rounded-0 btn-icon-split mb-0">
+              <a href="<?= base_url('master/a_employee'); ?>" class="btn btn-primary btn-sm bg-gradient-primary rounded-x btn-icon-split mb-0">
                 <span class="icon text-white-600">
                   <i class="fas fa-plus-circle"></i>
                 </span>
@@ -23,7 +23,7 @@
           </div>
 
           <!-- Data Table employee-->
-          <div class="card rounded-0 shadow mb-4">
+          <div class="card rounded-x shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-dark">DataTables Employee</h6>
             </div>
@@ -48,6 +48,7 @@
                       <th>Image</th>
                       <th>Name</th>
                       <th>Shift</th>
+                      <th>Department</th>
                       <th>Gender</th>
                       <th>DOB</th>
                       <th>Hire Date</th>
@@ -69,6 +70,7 @@
                         <td class="text-center"><img src="<?= base_url('images/pp/') . $emp['image']; ?>" style="width: 3em; height:3em;object-fit:cover;object-position:center center; border-width: 3px !important;" class="img-rounded border rounded-circle"></td>
                         <td class=" align-middle"><?= $emp['name']; ?></td>
                         <td class=" align-middle text-xs text-center"><?= date("h:i A", strtotime('2022-06-23 '.$emp['start'])) ?> - <?= date("h:i A", strtotime('2022-06-23 '.$emp['end'])) ?></td>
+                        <td class=" align-middle"><?= $emp['department_id']; ?></td>
                         <td class=" align-middle"><?php if ($emp['gender'] == 'M') {
                                                     echo 'Male';
                                                   } else {
@@ -77,12 +79,12 @@
                         <td class=" align-middle"><?= date("M d, Y", strtotime($emp['birth_date'])); ?></td>
                         <td class=" align-middle"><?= date("M d, Y", strtotime($emp['hire_date'])); ?></td>
                         <td class="text-center align-middle">
-                          <a href="<?= base_url('master/e_employee/') . $emp['id'] ?>" class="btn btn-primary rounded-0 btn-sm text-xs">
+                          <a href="<?= base_url('master/e_employee/') . $emp['id'] ?>" class="btn btn-primary rounded-x btn-sm text-xs">
                             <span class="icon text-white" title="Edit">
                               <i class="fas fa-edit"></i>
                             </span>
                           </a> |
-                          <a href="<?= base_url('master/d_employee/') . $emp['id'] ?>" class="btn btn-danger rounded-0 btn-sm text-xs" onclick="return confirm('Deleted employee will lost forever. Still want to delete?')">
+                          <a href="<?= base_url('master/d_employee/') . $emp['id'] ?>" class="btn btn-danger rounded-x btn-sm text-xs" onclick="return confirm('Deleted employee will lost forever. Still want to delete?')">
                             <span class="icon text-white" title="Delete">
                               <i class="fas fa-trash-alt"></i>
                             </span>

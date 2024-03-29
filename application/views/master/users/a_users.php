@@ -4,13 +4,13 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-          <a href="<?= base_url('master/users'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-0">
+          <a href="<?= base_url('master/users'); ?>" class="btn btn-light bg-gradient-light border btn-icon-split mb-4 rounded-x">
             <span class="icon text-white">
               <i class="fas fa-chevron-left"></i>
             </span>
             <span class="text">Back</span>
           </a>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-4">
             <div class="col-lg-5 p-0">
               <form action="<?= base_url('master/a_users/') . $e_id; ?>" method="POST">
                 <div class="card rouded-0">
@@ -33,7 +33,7 @@
                         <?= form_error('u_password', '<small class="text-danger">', '</small>') ?>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-0">
+                    <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-x">
                       <span class="icon text-white">
                         <i class="fas fa-plus-circle"></i>
                       </span>

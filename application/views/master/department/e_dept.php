@@ -10,9 +10,9 @@
             </span>
             <span class="text">Back</span>
           </a>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-4">
             <form action="" method="POST" class="col-lg-5 col-md-6 col-sm-12  p-0">
-              <div class="card rounded-0">
+              <div class="card rounded-x">
                 <h5 class="card-header">Department Master Data</h5>
                 <div class="card-body">
                     <?= $this->session->flashdata('message') ?>
@@ -27,7 +27,7 @@
                     <input type="text" class="form-control form-control-lg" name="d_name" id="d_name" value="<?= $d_old['name']; ?>">
                     <?= form_error('d_name', '<small class="text-danger">', '</small>') ?>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-0">
+                  <button type="submit" class="btn btn-sm btn-primary bg-gradient-primary btn-icon-split mt-4 float-right rounded-x">
                     <span class="icon text-white">
                       <i class="fas fa-check"></i>
                     </span>

@@ -51,12 +51,12 @@
                             <?= $dt['u_username']; ?>
                           </td>
                           <td class="text-center align-middle">
-                            <a href="<?= base_url('master/e_users/') . $dt['u_username'] ?>" class="btn btn-primary rounded-0 btn-sm text-xs ">
+                            <a href="<?= base_url('master/e_users/') . $dt['u_username'] ?>" class="btn btn-primary rounded-x btn-sm text-xs ">
                               <span class="icon text-white" title="Edit">
                                 <i class="fas fa-edit"></i>
                               </span>
                             </a> |
-                            <a href="<?= base_url('master/d_users/') . $dt['u_username'] ?>" class="btn btn-danger rounded-0 btn-sm text-xs" onclick="return confirm('Deleted Users will lost forever. Still want to delete?')">
+                            <a href="<?= base_url('master/d_users/') . $dt['u_username'] ?>" class="btn btn-danger rounded-x btn-sm text-xs" onclick="return confirm('Deleted Users will lost forever. Still want to delete?')">
                               <span class="icon text-white" title="Delete">
                                 <i class="fas fa-trash-alt"></i>
                               </span>
@@ -67,12 +67,12 @@
                             <a href="<?= base_url('master/a_users/') . $dt['e_id'] . '/' . $dt['d_id']; ?>" class="btn btn-primary btn-sm bg-gradient-primary rounded-pill px-3">Create Account</a>
                           </td>
                           <td class="text-center align-middle">
-                            <button class="btn btn-primary rounded-0 btn-sm text-xs" disabled>
+                            <button class="btn btn-primary rounded-x btn-sm text-xs" disabled>
                               <span class="icon text-white" title="Edit">
                                 <i class="fas fa-edit"></i>
                               </span>
                             </button> |
-                            <button class="btn btn-danger rounded-0 btn-sm text-xs" disabled>
+                            <button class="btn btn-danger rounded-x btn-sm text-xs" disabled>
                               <span class="icon text-white" title="Delete">
                                 <i class="fas fa-trash-alt"></i>
                               </span>
